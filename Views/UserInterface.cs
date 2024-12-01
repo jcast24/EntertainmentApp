@@ -27,6 +27,7 @@ public class UserInterface
             {
                 case MenuChoices.AddMovie:
                     // add movie
+                    MovieController.AddMovie();
                     break;
                 case MenuChoices.ViewMovies:
                     // view movie
@@ -34,6 +35,7 @@ public class UserInterface
                     break;
                 case MenuChoices.DeleteMovies:
                     // delete movie
+                    MovieController.DeleteMovie();
                     break;
                 case MenuChoices.ExitProg:
                     AnsiConsole.MarkupLine("[red]Goodbye![/]");
