@@ -1,6 +1,4 @@
-﻿using MovieApp.Controllers;
-using MovieApp.Views;
-using Spectre.Console;
+﻿using MovieApp.Views;
 
 namespace MovieApp;
 
