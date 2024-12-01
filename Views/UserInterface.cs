@@ -5,13 +5,6 @@ namespace MovieApp.Views;
 
 public class UserInterface
 {    
-    enum MenuChoices
-     {
-         AddMovie,
-         ViewMovies,
-         DeleteMovies,
-         ExitProg,
-     }
     internal void MainMenu()
     {
         bool keepRunning = true;
@@ -19,25 +12,25 @@ public class UserInterface
         while (keepRunning)
         {
             var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<MenuChoices>()
+                new SelectionPrompt<MenuChoiceEnum>()
                     .Title("[cyan]Choose your choice:[/]")
-                    .AddChoices(Enum.GetValues<MenuChoices>()));
+                    .AddChoices(Enum.GetValues<MenuChoiceEnum>()));
 
             switch (choice)
             {
-                case MenuChoices.AddMovie:
+                case MenuChoiceEnum.AddMovie:
                     // add movie
                     MovieController.AddMovie();
                     break;
-                case MenuChoices.ViewMovies:
+                case MenuChoiceEnum.ViewMovies:
                     // view movie
                     MovieController.ViewMovies();
                     break;
-                case MenuChoices.DeleteMovies:
+                case MenuChoiceEnum.DeleteMovies:
                     // delete movie
                     MovieController.DeleteMovie();
                     break;
-                case MenuChoices.ExitProg:
+                case MenuChoiceEnum.ExitProg:
                     AnsiConsole.MarkupLine("[red]Goodbye![/]");
                     keepRunning = false;
                     break;
