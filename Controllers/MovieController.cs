@@ -10,7 +10,7 @@ public class MovieController
         AnsiConsole.MarkupLine("[yellow]List of movies: [/]");
         foreach (var movie in MockDatabase.Movies)
         {
-            AnsiConsole.MarkupLine($"- [cyan]{movie}[/]");
+            AnsiConsole.MarkupLine($"- [cyan]{movie.Title} - [yellow]{movie.Genre}[/] - [purple]{movie.Score}[/][/]");
         }
         AnsiConsole.MarkupLine("Press any key to continue");
         Console.ReadKey();
