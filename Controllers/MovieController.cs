@@ -1,21 +1,14 @@
-﻿using Spectre.Console;
+﻿using MovieApp.Models;
+using Spectre.Console;
 
 namespace MovieApp.Controllers;
 
 public class MovieController
 {
-    private static List<string> moviesList = new()
-    {
-        "Star Wars: A New Hope",
-        "The Day After Tomorrow",
-        "Man on Fire",
-        "Avatar",
-        "Children of Men",
-    };
     internal static void ViewMovies()
     {
         AnsiConsole.MarkupLine("[yellow]List of movies: [/]");
-        foreach (var movie in moviesList)
+        foreach (var movie in MockDatabase.Movies)
         {
             AnsiConsole.MarkupLine($"- [cyan]{movie}[/]");
         }
@@ -27,13 +20,13 @@ public class MovieController
     {
         var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie you would like to add: ");
         
-        if (moviesList.Contains(movieTitle))
+        if (MockDatabase.Movies.Contains(movieTitle))
         {
             AnsiConsole.MarkupLine("[red]Movie is already in the list![/]");
         }
         else
         {
-            moviesList.Add(movieTitle);
+            MockDatabase.Movies.Add(movieTitle);
             AnsiConsole.MarkupLine($"[green]{movieTitle} has been successfully added![/]");
         }
         
@@ -43,14 +36,14 @@ public class MovieController
 
     internal static void DeleteMovie()
     {
-        if (moviesList.Count == 0)
+        if (MockDatabase.Movies.Count == 0)
         {
             AnsiConsole.MarkupLine("[red] No books have been found! [/]");
         }
         
         var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie that you would like to delete: ");
 
-        if (moviesList.Remove(movieTitle))
+        if (MockDatabase.Movies.Remove(movieTitle))
         {
             AnsiConsole.MarkupLine($"[green] {movieTitle} has been successfully deleted. [/]");
         }
