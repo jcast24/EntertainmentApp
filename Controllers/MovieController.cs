@@ -19,15 +19,18 @@ public class MovieController
     internal void AddMovie()
     {
         var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie you would like to add: ");
+        var movieGenre = AnsiConsole.Ask<string>("Enter the genre fo the movie that you would like to add: ");
+        var movieScore = AnsiConsole.Ask<int>("What is your score for the movie: ");
         
-        if (MockDatabase.Movies.Contains(movieTitle))
+        if (MockDatabase.Movies.Exists(m => m.Title.Equals(movieTitle, StringComparison.OrdinalIgnoreCase)))
         {
             AnsiConsole.MarkupLine("[red]Movie is already in the list![/]");
         }
         else
         {
-            MockDatabase.Movies.Add(movieTitle);
-            AnsiConsole.MarkupLine($"[green]{movieTitle} has been successfully added![/]");
+            var newMovie = new Movie(movieTitle, movieGenre, movieScore);
+            MockDatabase.Movies.Add(newMovie);
+            AnsiConsole.MarkupLine($"[green]New movie has been successfully added![/]");
         }
         
         AnsiConsole.MarkupLine("Press any key to continue!");
