@@ -5,7 +5,7 @@ namespace MovieApp.Controllers;
 
 public class MovieController
 {
-    internal static void ViewMovies()
+    internal void ViewMovies()
     {
         AnsiConsole.MarkupLine("[yellow]List of movies: [/]");
         foreach (var movie in MockDatabase.Movies)
@@ -16,7 +16,7 @@ public class MovieController
         Console.ReadKey();
     }
 
-    internal static void AddMovie()
+    internal void AddMovie()
     {
         var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie you would like to add: ");
         
@@ -34,7 +34,7 @@ public class MovieController
         Console.ReadKey();
     }
 
-    internal static void DeleteMovie()
+    internal void DeleteMovie()
     {
         if (MockDatabase.Movies.Count == 0)
         {
