@@ -4,10 +4,13 @@ using Spectre.Console;
 namespace MovieApp.Views;
 
 public class UserInterface
-{    
+{
+    private MovieController _movieController = new MovieController();
+    
     internal void MainMenu()
     {
         bool keepRunning = true;
+        
 
         while (keepRunning)
         {
@@ -20,15 +23,15 @@ public class UserInterface
             {
                 case MenuChoiceEnum.AddMovie:
                     // add movie
-                    MovieController.AddMovie();
+                    _movieController.AddMovie();
                     break;
                 case MenuChoiceEnum.ViewMovies:
                     // view movie
-                    MovieController.ViewMovies();
+                    _movieController.ViewMovies();
                     break;
                 case MenuChoiceEnum.DeleteMovies:
                     // delete movie
-                    MovieController.DeleteMovie();
+                    _movieController.DeleteMovie();
                     break;
                 case MenuChoiceEnum.ExitProg:
                     AnsiConsole.MarkupLine("[red]Goodbye![/]");
