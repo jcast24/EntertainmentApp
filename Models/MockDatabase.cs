@@ -2,12 +2,12 @@
 
 public class MockDatabase
 {
-   internal static List<string> Movies = new List<string>()
+
+   internal static List<Movie> Movies = new List<Movie>()
    {
-        "Star Wars: A New Hope",
-        "The Day After Tomorrow",
-        "Man on Fire",
-        "Avatar",
-        "Children of Men",
+       new Movie("Star Wars: A New Hope", "Sci-fi", 10),
+       new Movie("The Day After Tomorrow", "Sci-fi", 8),
+       new Movie("Man on Fire", "Action", 8),
+       new Movie("Avatar", "Sci-fi", 9),
    };
 }
