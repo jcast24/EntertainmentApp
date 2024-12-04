@@ -44,15 +44,20 @@ public class MovieController
             AnsiConsole.MarkupLine("[red] No books have been found! [/]");
         }
         
-        var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie that you would like to delete: ");
+        // var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie that you would like to delete: ");
+        var bookToDelete = AnsiConsole.Prompt(new SelectionPrompt<Movie>()
+            .Title("Select a movie to delete: ")
+            .UseConverter(m => $"{m.Title}")
+            .AddChoices(MockDatabase.Movies)
+        );
 
-        if (MockDatabase.Movies.Remove(movieTitle))
+        if (MockDatabase.Movies.Remove(bookToDelete))
         {
-            AnsiConsole.MarkupLine($"[green] {movieTitle} has been successfully deleted. [/]");
+            AnsiConsole.MarkupLine($"[green] Movie has been successfully deleted. [/]");
         }
         else
         {
-            AnsiConsole.MarkupLine($"[red]Book not found[/]");
+            AnsiConsole.MarkupLine($"[red]Movie is not found[/]");
         }
         AnsiConsole.MarkupLine("Press any key to continue!");
         Console.ReadKey();
