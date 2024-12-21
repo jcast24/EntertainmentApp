@@ -10,4 +10,6 @@ public class MockDatabase
        new Movie("Man on Fire", "Action", 8),
        new Movie("Avatar", "Sci-fi", 9),
    };
+
+   internal static List<Comic> Comics = new List<Comic>(){};
 }
