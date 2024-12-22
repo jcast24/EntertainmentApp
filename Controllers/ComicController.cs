@@ -34,7 +34,26 @@ public class ComicController : IBaseController
 
     public void AddItem()
     {
+        var comicTitle = AnsiConsole.Ask<string>("Enter the name of the comic title: ");
+        var comicAuthor = AnsiConsole.Ask<string>("Enter the name of the author: ");
+        var comicGenre = AnsiConsole.Ask<string>("Enter the genre of the comic: ");
+        var comicReview = AnsiConsole.Ask<string>("Enter your review for the comic: ");
+        var comicScore = AnsiConsole.Ask<int>("Enter the score that you rate the comic: ");
         
+        if (MockDatabase.Comics.Exists(c => c.Title.Equals(comicTitle)))
+        {
+            AnsiConsole.MarkupLine("[red]Comic already exists[/]");
+        }
+        else 
+        {
+            var newComic = new Comic(comicTitle, comicAuthor, comicGenre, comicReview, comicScore);
+            MockDatabase.Comics.Add(newComic);
+            AnsiConsole.MarkupLine("[green]Comic has been successfully added[/]");
+        }
+
+        AnsiConsole.MarkupLine("Press any key to continue!");
+        Console.ReadKey();
+
     }
 
     public void DeleteItem()
