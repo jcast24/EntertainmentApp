@@ -1,9 +1,20 @@
 ﻿namespace MovieApp.Views;
 
-public enum MenuChoiceEnum
+internal class Enums
 {
-    AddMovie,
-    ViewMovies,
-    DeleteMovies,
-    ExitProg,
+    internal enum MenuChoiceEnum
+    {
+        AddMovie,
+        ViewMovies,
+        DeleteMovies,
+        ExitProg,
+    }
+    
+    internal enum ItemType
+    {
+        Movie,
+        Comic,
+        TVShow,
+    }
+    
 }
