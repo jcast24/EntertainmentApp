@@ -6,6 +6,7 @@ namespace MovieApp.Views;
 public class UserInterface
 {
     private MovieController _movieController = new MovieController();
+    private ComicController _comicController = new ComicController();
 
     internal void MainMenu()
     {
@@ -39,4 +40,44 @@ public class UserInterface
             }
         }
     }
+
+    private void ViewItems(Enums.ItemType itemType)
+    {
+        switch(itemType)
+        {
+            case Enums.ItemType.Comic:
+                _comicController.ViewItems();
+                break;
+            case Enums.ItemType.Movie:
+                _movieController.ViewItems();
+                break;
+        }
+    }
+
+    private void AddItem(Enums.ItemType itemType)
+    {
+        switch(itemType)
+        {
+            case Enums.ItemType.Comic:
+                _comicController.AddItem();
+                break;
+            case Enums.ItemType.Movie:
+                _movieController.AddItem();
+                break;
+        }
+    }
+
+    private void DeleteItem(Enums.ItemType itemType)
+    {
+        switch(itemType)
+        {
+            case Enums.ItemType.Comic:
+                _comicController.DeleteItem();
+                break;
+            case Enums.ItemType.Movie:
+                _movieController.DeleteItem();
+                break;
+        }
+    }
+
 }
