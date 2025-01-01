@@ -16,15 +16,15 @@ public class ComicController : IBaseController
         table.AddColumn("[cyan]Review[/]");
         table.AddColumn("[cyan]Score[/]");
 
-        foreach(var comic in MockDatabase.Comics) 
+        foreach (var comic in MockDatabase.Comics)
         {
             table.AddRow(
-                    $"[cyan]{comic.Title}[/]",
-                    $"[cyan]{comic.Author}[/]",
-                    $"[cyan]{comic.Genre}[/]",
-                    $"[cyan]{comic.Review}[/]",
-                    $"[cyan]{comic.Score}[/]"
-                    );
+                $"[cyan]{comic.Title}[/]",
+                $"[cyan]{comic.Author}[/]",
+                $"[cyan]{comic.Genre}[/]",
+                $"[cyan]{comic.Review}[/]",
+                $"[cyan]{comic.Score}[/]"
+            );
         }
 
         AnsiConsole.Write(table);
@@ -39,25 +39,53 @@ public class ComicController : IBaseController
         var comicGenre = AnsiConsole.Ask<string>("Enter the genre of the comic: ");
         var comicReview = AnsiConsole.Ask<string>("Enter your review for the comic: ");
         var comicScore = AnsiConsole.Ask<int>("Enter the score that you rate the comic: ");
-        
-        if (MockDatabase.Comics.Exists(c => c.Title.Equals(comicTitle)))
+
+        foreach (var comic in MockDatabase.Comics)
         {
-            AnsiConsole.MarkupLine("[red]Comic already exists[/]");
+            if (string.Equals(comic.Title, comicTitle, StringComparison.OrdinalIgnoreCase))
+            {
+                AnsiConsole.MarkupLine("[red]Comic already exists[/]");
+            }
         }
-        else 
-        {
-            var newComic = new Comic(comicTitle, comicAuthor, comicGenre, comicReview, comicScore);
-            MockDatabase.Comics.Add(newComic);
-            AnsiConsole.MarkupLine("[green]Comic has been successfully added[/]");
-        }
+
+        // if (MockDatabase.Comics.Exists(c => c.Title.Equals(comicTitle)))
+        // {
+        //     AnsiConsole.MarkupLine("[red]Comic already exists[/]");
+        // }
+        // else
+        // {
+        //     var newComic = new Comic(comicTitle, comicAuthor, comicGenre, comicReview, comicScore);
+        //     MockDatabase.Comics.Add(newComic);
+        //     AnsiConsole.MarkupLine("[green]Comic has been successfully added[/]");
+        // }
 
         AnsiConsole.MarkupLine("Press any key to continue!");
         Console.ReadKey();
-
     }
 
     public void DeleteItem()
     {
+        if (MockDatabase.Comics.Count == 0)
+        {
+            AnsiConsole.MarkupLine("[red] No comics have been found! [/]");
+        }
+
+        var comicToDelete = AnsiConsole.Prompt(
+            new SelectionPrompt<Comic>()
+                .Title("Select a comic to delete: ")
+                .UseConverter(c => $"{c.Title}")
+                .AddChoices(MockDatabase.Comics)
+        );
+
+        if (MockDatabase.Comics.Remove(comicToDelete)) {
+            AnsiConsole.MarkupLine("[green]Comic has been sucessfully deleted. [/]");
+        }
+        else 
+        {
+            AnsiConsole.MarkupLine("[red]Comic has not been found[/]");
+        }
+        AnsiConsole.MarkupLine("Press any key to continue!");
+        Console.ReadKey();
 
     }
 }
