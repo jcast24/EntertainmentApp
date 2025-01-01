@@ -12,5 +12,4 @@ internal class Movie
         Genre = genre;
         Score = score;
     }
-
 }
