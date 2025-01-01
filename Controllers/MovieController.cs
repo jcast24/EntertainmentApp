@@ -3,9 +3,9 @@ using Spectre.Console;
 
 namespace MovieApp.Controllers;
 
-public class MovieController
+public class MovieController : IBaseController
 {
-    internal void ViewMovies()
+    public void ViewItems()
     {
         // AnsiConsole.MarkupLine("[yellow]List of movies: [/]");
         // foreach (var movie in MockDatabase.Movies)
@@ -27,19 +27,18 @@ public class MovieController
         foreach (var movie in MockDatabase.Movies)
         {
             table.AddRow(
-                    $"[cyan]{movie.Title}[/]",
-                    $"[cyan]{movie.Genre}[/]",
-                    $"[cyan]{movie.Score}[/]"
-                    );
+                $"[cyan]{movie.Title}[/]",
+                $"[cyan]{movie.Genre}[/]",
+                $"[cyan]{movie.Score}[/]"
+            );
         }
 
         AnsiConsole.Write(table);
         AnsiConsole.MarkupLine("Press any key to continue");
         Console.ReadKey();
-
     }
 
-    internal void AddMovie()
+    public void AddItem()
     {
         var movieTitle = AnsiConsole.Ask<string>(
             "Enter the name of the movie you would like to add: "
@@ -68,7 +67,7 @@ public class MovieController
         Console.ReadKey();
     }
 
-    internal void DeleteMovie()
+    public void DeleteItem()
     {
         if (MockDatabase.Movies.Count == 0)
         {
