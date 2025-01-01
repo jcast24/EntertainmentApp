@@ -6,41 +6,37 @@ namespace MovieApp.Views;
 public class UserInterface
 {
     private MovieController _movieController = new MovieController();
-    
+
     internal void MainMenu()
     {
-        bool keepRunning = true;
-        
-
-        while (keepRunning)
+        while (true)
         {
-            var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<MenuChoiceEnum>()
-                    .Title("[cyan]Choose your choice:[/]")
-                    .AddChoices(Enum.GetValues<MenuChoiceEnum>()));
+            Console.Clear();
 
-            switch (choice)
+            var actionChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<Enums.MenuChoiceEnum>()
+                    .Title("What do you want to do next?")
+                    .AddChoices(Enum.GetValues<Enums.MenuChoiceEnum>())
+            );
+
+            var itemTypeChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<Enums.ItemType>()
+                    .Title("Select the type of item:")
+                    .AddChoices(Enum.GetValues<Enums.ItemType>())
+            );
+
+            switch(actionChoice) 
             {
-                case MenuChoiceEnum.AddMovie:
-                    // add movie
-                    _movieController.AddMovie();
+                case Enums.MenuChoiceEnum.ViewItems:
+                    ViewItems(itemTypeChoice);
                     break;
-                case MenuChoiceEnum.ViewMovies:
-                    // view movie
-                    _movieController.ViewMovies();
+                case Enums.MenuChoiceEnum.AddItem:
+                    AddItem(itemTypeChoice);
                     break;
-                case MenuChoiceEnum.DeleteMovies:
-                    // delete movie
-                    _movieController.DeleteMovie();
-                    break;
-                case MenuChoiceEnum.ExitProg:
-                    AnsiConsole.MarkupLine("[red]Goodbye![/]");
-                    keepRunning = false;
-                    break;
-                default:
-                    AnsiConsole.MarkupLine("Choose an option!");
+                case Enums.MenuChoiceEnum.DeleteItems:
+                    DeleteItem(itemTypeChoice);
                     break;
             }
-        } 
+        }
     }
 }
