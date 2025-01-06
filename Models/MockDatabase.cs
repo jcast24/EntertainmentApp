@@ -11,5 +11,7 @@ public class MockDatabase
        new Movie("Avatar", "Sci-fi", 9),
    };
 
-   internal static List<Comic> Comics = new List<Comic>(){};
+   internal static List<Comic> Comics = new List<Comic>(){
+       new Comic("Daredevil", "Superhero", "Zdarsky", "Love Daredevil", 10 )
+   };
 }
