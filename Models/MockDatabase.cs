@@ -14,4 +14,8 @@ public class MockDatabase
    internal static List<Comic> Comics = new List<Comic>(){
        new Comic("Daredevil", "Superhero", "Zdarsky", "Love Daredevil", 10 )
    };
+
+   internal static List<TVShow> TV = new List<TVShow>(){
+       new TVShow("Andor", "Sci-fi", 10)
+   };
 }
