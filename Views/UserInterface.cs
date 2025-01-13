@@ -7,6 +7,7 @@ public class UserInterface
 {
     private MovieController _movieController = new MovieController();
     private ComicController _comicController = new ComicController();
+    private TVShowController _tvShowController = new TVShowController();
 
     internal void MainMenu()
     {
@@ -51,6 +52,9 @@ public class UserInterface
             case Enums.ItemType.Movie:
                 _movieController.ViewItems();
                 break;
+            case Enums.ItemType.TVShow:
+                _tvShowController.ViewItems();
+                break;
         }
     }
 
@@ -64,6 +68,9 @@ public class UserInterface
             case Enums.ItemType.Movie:
                 _movieController.AddItem();
                 break;
+            case Enums.ItemType.TVShow:
+                _tvShowController.AddItem();
+                break;
         }
     }
 
@@ -76,6 +83,9 @@ public class UserInterface
                 break;
             case Enums.ItemType.Movie:
                 _movieController.DeleteItem();
+                break;
+            case Enums.ItemType.TVShow:
+                _tvShowController.DeleteItem();
                 break;
         }
     }
