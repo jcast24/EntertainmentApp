@@ -31,7 +31,21 @@ public class TVShowController : IBaseController
 
     public void AddItem()
     {
-        throw new NotImplementedException();
+        var tvShowTitle = AnsiConsole.Ask<string>("Enter the name of the TV show you would like to add: ");
+        var tvShowGenre = AnsiConsole.Ask<string>("Enter the genre of the TV show: ");
+        var tvShowScore = AnsiConsole.Ask<int>("What do you rate the TV show:  ");
+
+        if (MockDatabase.TV.Exists(tv => tv.Title.Equals(tvShowTitle, StringComparison.OrdinalIgnoreCase)))
+        {
+            AnsiConsole.MarkupLine("[red]Movie is already in the list [/]");
+        }
+        else {
+            var newTVShow = new TVShow(tvShowTitle, tvShowGenre, tvShowScore);
+            MockDatabase.TV.Add(newTVShow);
+            AnsiConsole.MarkupLine("[green]New TV Show has been added.[/]");
+        }
+        AnsiConsole.MarkupLine("Press any key to continue!");
+        Console.ReadKey();
     }
 
     public void DeleteItem()
