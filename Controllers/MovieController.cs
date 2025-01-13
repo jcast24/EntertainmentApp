@@ -3,7 +3,7 @@ using Spectre.Console;
 
 namespace MovieApp.Controllers;
 
-public class MovieController : IBaseController
+internal class MovieController : BaseController, IBaseController
 {
     public void ViewItems()
     {
@@ -60,10 +60,9 @@ public class MovieController : IBaseController
         {
             var newMovie = new Movie(movieTitle, movieGenre, movieScore);
             MockDatabase.Movies.Add(newMovie);
-            AnsiConsole.MarkupLine($"[green]New movie has been successfully added![/]");
+            DisplayMessage("Movie has been successfully added!", "green");
         }
-
-        AnsiConsole.MarkupLine("Press any key to continue!");
+        DisplayMessage("Press any key to continue.");
         Console.ReadKey();
     }
 
@@ -75,22 +74,22 @@ public class MovieController : IBaseController
         }
 
         // var movieTitle = AnsiConsole.Ask<string>("Enter the name of the movie that you would like to delete: ");
-        var bookToDelete = AnsiConsole.Prompt(
+        var movieToDelete = AnsiConsole.Prompt(
             new SelectionPrompt<Movie>()
                 .Title("Select a movie to delete: ")
                 .UseConverter(m => $"{m.Title}")
                 .AddChoices(MockDatabase.Movies)
         );
 
-        if (MockDatabase.Movies.Remove(bookToDelete))
+        if (ConfirmationDelete(movieToDelete.Title))
         {
-            AnsiConsole.MarkupLine($"[green] Movie has been successfully deleted. [/]");
+            DisplayMessage("Book has been sucessfully deleted.", "green");
         }
         else
         {
-            AnsiConsole.MarkupLine($"[red]Movie is not found[/]");
+            DisplayMessage("Book not found.", "red");
         }
-        AnsiConsole.MarkupLine("Press any key to continue!");
+        DisplayMessage("Press any key to continue", "green");
         Console.ReadKey();
     }
 }
